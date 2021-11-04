@@ -1,2 +1,24 @@
 @startuml
+:Usuário: as usuario
+
+usuario -> (Iniciar APP)
+(Iniciar APP) --> (Fazer Login)
+usuario => Perfil
+
+
+component Perfil {
+(Editar Biografia)
+(Fazer Login) .> (Editar Biografia)
+(Fazer Login) .> (Seu Painel)
+(Fazer Login) .-> (Sobre)
+(Fazer Login) .-> (Formação Acadêmica)
+(Fazer Login) .-> (Fazer Posts)
+component Conexões {
+(Fazer Login) .> (Adicionar Amigo)
+(Fazer Login) .> (Enviar Mensagem)
+(Fazer Login) .> (Fazer Recomendações)
+(Fazer Login) .> (Curtir Posts)
+}
+}
+
 @enduml
