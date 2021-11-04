@@ -1,0 +1,49 @@
+@startuml
+
+component Vagas {
+(Pesquisar Vagas)
+(Pesquisas Recentes)
+(Recomendações)
+(Visualizar Vaga)
+component Visualização {
+(Visualizar Vaga) -.> (Descrição)
+(Visualizar Vaga) -.> (Horário)
+(Visualizar Vaga) -.> (Requisitos)
+(Visualizar Vaga) -.> (Sobre a Empresa)
+(Visualizar Vaga) -.> (Faixa Salarial)
+(Visualizar Vaga) -.> (Salvar Vaga)
+(Visualizar Vaga) -.> (Candidatar-se)
+}
+(Filtrar Vagas) -.> Estilo
+component Filtro {
+(Filtrar Vagas) -.> (Área de Atuação)
+(Filtrar Vagas) -.> (Localização)
+component Estilo {
+(Presencial)
+(Home Office)
+(Híbrido)
+}
+}
+component Menu {
+Menu -.> (Ver Candidaturas)
+component Candidaturas {
+(Ver Candidaturas) -.> (Currículo Enviado)
+(Ver Candidaturas) -.> (Status da Candidatura)
+}
+Menu -.> (Gerenciar Alertas)
+Menu -.> (Avaliar Competencias)
+Menu -.> (Gerenciar Configurações)
+component Anunciar {
+(Descrever Cargo)
+(Política Empresarial)
+(Definir Localidade)
+(Estilo de Trabalho)
+(Descrição)
+}
+Menu -> Anunciar
+}
+}
+
+Candidaturas -.> (Visualizar Vaga)
+
+@enduml
