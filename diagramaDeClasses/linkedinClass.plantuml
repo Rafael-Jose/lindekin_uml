@@ -1,0 +1,71 @@
+@startuml Sistema 
+
+title <b> Sistema Linkedin </b>
+
+class Vaga {
+    - titulo
+    - descricao
+    - faixaSalarial
+    - metodologiaTrabalho
+    - sobreEmpresa
+
+    - aplicarVaga()
+    - salvarVaga()
+    - ativarAlerta()
+}
+
+class Menu {
+    - candidaturas List<Candidatura>
+
+    - verCandidaturas()
+    - gerenciarAlertas()
+    - anunciarVaga()
+}
+
+class Candidatura {
+    - vaga: Vaga
+    - status
+    - data
+}
+
+class Status {
+    - perfilVisualizado: Bool
+    - candidaturaExpirada: Bool
+    - entrevistaMarcada: Bool
+}
+
+package "Usuário do Sistema" {
+    class Usuario {
+    - perfil: Perfil
+    - vagas List<Vaga>
+    - menu: Menu
+
+    - iniciarApp()
+    - fazerLogin()
+    - buscarVagas()
+    - filtrarVagas()
+}
+
+class Perfil {
+    - nome
+    - bio
+    - conexoes
+
+    - editarBio()
+    - fazerPost()
+    - curtirPost()
+    - adicionarAmigo()
+    - enviarMensagem()
+    - fazerRecomendacoes()
+    - fazerConexoes()
+}
+    Perfil <|-- Usuario
+    Menu <|-- Usuario
+}
+
+Usuario -- "*" Vaga: possui
+Candidatura -- Vaga: possui
+Menu -- "*" Candidatura: possui
+Status -- Candidatura
+
+@enduml
