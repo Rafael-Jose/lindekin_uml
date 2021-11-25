@@ -1,0 +1,78 @@
+@startuml
+
+skinparam activity {
+    FontSize           17
+    AttributeFontSize  15
+    ActivityDiamondFontSize 20
+    AttributeFontname  Droid Sans Mono
+}
+
+partition "Sistema Linkedin" {
+    start
+        if () then (Já Registrado)
+           
+            partition Logar {
+                start
+                    :Receber login e senha;
+                    :Validar login;
+
+                    if () then (Login válido)
+                        :Validar senha;
+
+                        if () then (Senha válida) 
+                            :Logar;
+                            :Editar Perfil;
+
+                            if () then (Perfil Editado) 
+                                :Vagas;
+
+                            else (Perfil Não Editado)
+                                :Editar Bio;
+                                :Adicionar Skills;
+                                :Formação Acadêminca;
+                                :Criar Conexões;
+                                :Vagas;
+                            endif
+                        else (Senha inválida)
+                            end
+                        endif
+
+                    else (Login Inválido)
+                        end
+                    endif
+            }
+
+        else (Ainda não registrado)
+            fork
+                :Auto-Registrar sistema;
+            fork again
+                :Auto-Registrar Google;
+            fork again
+                :Auto-Registrar Facebook;
+            end fork
+            :Notificação cadastro;
+            stop
+        endif
+
+        partition Vagas {
+            start
+                :Buscar Vagas;
+                :Filtrar Vagas;
+                :Escolher Vaga;
+                :Analisar Dados;
+                :Candidatar-se;
+                if () then (Se Candidatou)
+                    :Processo Seletivo;
+                    stop
+                else (Não Candidatou)
+                    :Salvar Vaga;
+                    if () then (Salvou a Vaga)
+                        :Acompanhar Empresa;
+                        end
+                    else (Não Salvou a Vaga)
+                        end
+                    endif
+                endif
+        }
+}
+@enduml
