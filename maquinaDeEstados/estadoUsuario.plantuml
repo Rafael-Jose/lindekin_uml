@@ -1,0 +1,54 @@
+@startuml Sistema Linkedin
+
+[*] --> AguardandoSistema : fazerLogin()
+AguardandoSistema : entry / fazerRequisicao()
+AguardandoSistema : do / autenticacao()
+AguardandoSistema : end / receberResposta()
+state a <<choice>>
+state b <<choice>>
+state c <<choice>>
+state d <<choice>>
+AguardandoSistema --> a : avaliarResposta()
+a --> LoginInvalido : respostaInvalida()
+a --> Login : repostaValida()
+LoginInvalido : entry / tentarNovamente()
+LoginInvalido : do / 
+LoginInvalido : end / fazerLogin() 
+LoginInvalido --> a
+Login --> b : avaliarStatusUsuario()
+b --> Definir : statusPadrao()
+Definir : entry / escolherNovoStatus()
+Definir : do / 
+Definir : end / statusDeterminado()
+Definir --> c : avaliarStatusUsuario()
+c --> [*] : statusPadrao()
+c --> b : naoPadrao()
+b --> FormacaoAcademica : statusOpenToWork()
+FormacaoAcademica : entry / cadastrarFormacao()
+FormacaoAcademica : do / 
+FormacaoAcademica : end / formacaoDefinida()
+FormacaoAcademica --> Bio
+Bio : entry / editarBio()
+Bio : do / 
+Bio : end / bioEditada()
+b --> Bio : statusHiring()
+Bio --> d : avaliarStatusUsuario()
+d --> BuscarVagas : statusOpenToWork()
+d --> CadastrarVaga : statusHiring()
+BuscarVagas : entry / escolherFiltros()
+BuscarVagas : do / 
+BuscarVagas : end / selecionarVaga()
+BuscarVagas --> Candidatura
+Candidatura : entry / enviarCurriculo()
+Candidatura : do / processoSeletivo()
+Candidatura : end / receberResultado()
+Candidatura --> [*]
+CadastrarVaga : entry / descreverVaga()
+CadastrarVaga : do / 
+CadastrarVaga : end / vagaCadastrada()
+CadastrarVaga --> Contratacao 
+Contratacao : entry / analisarCandidatos()
+Contratacao : do /
+Contratacao : end / selecionarCandidato()
+Contratacao --> [*]
+@enduml
