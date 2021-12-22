@@ -1,0 +1,31 @@
+@startuml Linkedin
+
+component Menu {
+    component Vagas
+    component BuscarVagas
+    component MinhasVagas
+    component Recomendacoes
+    component PesquisasRecentes
+    Vagas ---- BuscarVagas
+    Vagas ---- MinhasVagas
+    Vagas ---- Recomendacoes
+    Vagas ---- PesquisasRecentes
+    component Inicio
+    component Publicacoes
+    Inicio --> Publicacoes
+    component Publicacao
+    component Compartilhar
+    Publicacao --- Compartilhar
+    component Notificacoes
+    component MinhaRede
+    component Gerenciar {
+        component Conexoes
+        component Seguindo
+        component Empresas
+    }
+    MinhaRede -- Gerenciar
+}
+
+Usuario -> Menu
+
+@enduml
